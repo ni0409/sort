@@ -29,18 +29,16 @@
 - 特點：平均很快，但最壞情況會退化
 
 ## 複雜度分析
-|    排序法	   |  最佳時間 	|   平均時間   |	  最壞時間   |	空間複雜度 |	穩定性 |
-| Bubble Sort  |	  O(n)    |	   O(n²)  	|    O(n²)  	|    O(1)   |  穩定  |
-|Selection Sort|	  O(n²)   |	   O(n²)  	|    O(n²)	  |    O(1)  	| 不穩定 |
-|Insertion Sort|	  O(n)    |	   O(n²)    |    O(n²)  	|    O(1)	  |  穩定  |
-|  Merge Sort  | O(n log n) |	O(n log n)	| O(n log n)  |	   O(n)	  |  穩定  |
-|  Quick Sort	 | O(n log n) |	O(n log n)	|    O(n²)    | O(log n)	| 不穩定 |
-
-###　結論：
-氣泡排序法、選擇排序法和插入排序法屬於簡單排序法，當資料量增加時效率較差；合併排序法與快速排序法屬於高效率排序法，對大規模資料更有優勢；插入排序法在「資料原本接近排序完成」時可能比其他簡單排序法更快。
+| 排序法            |       最佳時間 |       平均時間 |       最壞時間 |    空間複雜度 | 穩定性 |
+| -------------- | ---------: | ---------: | ---------: | -------: | --- |
+| Bubble Sort    |       O(n) |      O(n²) |      O(n²) |     O(1) | 穩定  |
+| Selection Sort |      O(n²) |      O(n²) |      O(n²) |     O(1) | 不穩定 |
+| Insertion Sort |       O(n) |      O(n²) |      O(n²) |     O(1) | 穩定  |
+| Merge Sort     | O(n log n) | O(n log n) | O(n log n) |     O(n) | 穩定  |
+| Quick Sort     | O(n log n) | O(n log n) |      O(n²) | O(log n) | 不穩定 |
 
 ## 實驗設計
-'''c 
+''' c 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
