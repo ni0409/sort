@@ -38,7 +38,7 @@
 | Quick Sort     | O(n log n) | O(n log n) |      O(n²) | O(log n) | 不穩定 |
 
 ## 實驗設計
-''' c 
+```C
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -259,7 +259,8 @@ int main() {
 
     return 0;
 }
-'''
+```
+
 ## 結果比較
 |    n | Bubble | Selection | Insertion | Merge | Quick |
 | ---: | -----: | --------: | --------: | ----: | ----: |
