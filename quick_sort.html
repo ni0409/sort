@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quick Sort 視覺化</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#f4f4f4;
+}
+
+#container{
+    margin-top:40px;
+}
+
+.bar{
+    display:inline-block;
+    width:40px;
+    margin:2px;
+    background:#3498db;
+    color:white;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    margin:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>快速排序法 Quick Sort</h1>
+
+<a href="index.html" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">← 返回主頁</a>
+
+<input id="numbers" placeholder="例如: 8,3,1,6,2">
+<br><br>
+
+<button onclick="startSort()">開始排序</button>
+
+<div id="container"></div>
+
+<script>
+
+let arr=[];
+
+function drawArray(){
+
+    let container=document.getElementById("container");
+    container.innerHTML="";
+
+    for(let i=0;i<arr.length;i++){
+
+        let bar=document.createElement("div");
+        bar.className="bar";
+        bar.style.height=arr[i]*20+"px";
+        bar.innerText=arr[i];
+
+        container.appendChild(bar);
+    }
+}
+
+function sleep(ms){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function partition(low, high){
+
+    let pivot=arr[high];
+    let i=low-1;
+
+    for(let j=low;j<high;j++){
+
+        if(arr[j]<pivot){
+
+            i++;
+
+            let temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+
+            drawArray();
+            await sleep(500);
+        }
+    }
+
+    let temp=arr[i+1];
+    arr[i+1]=arr[high];
+    arr[high]=temp;
+
+    drawArray();
+    await sleep(500);
+
+    return i+1;
+}
+
+async function quickSort(low, high){
+
+    if(low<high){
+
+        let pi=await partition(low, high);
+
+        await quickSort(low, pi-1);
+
+        await quickSort(pi+1, high);
+    }
+}
+
+async function startSort(){
+
+    let input=document.getElementById("numbers").value;
+
+    arr=input.split(",").map(Number);
+
+    drawArray();
+
+    await quickSort(0, arr.length-1);
+
+    drawArray();
+}
+
+</script>
+
+</body>
+</html>
