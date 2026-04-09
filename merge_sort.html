@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Merge Sort 視覺化</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    background:#f4f4f4;
+}
+
+#container{
+    margin-top:40px;
+}
+
+.bar{
+    display:inline-block;
+    width:40px;
+    margin:2px;
+    background:#3498db;
+    color:white;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    margin:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>合併排序法 Merge Sort</h1>
+
+<a href="index.html" style="display: inline-block; padding: 10px 20px; margin: 10px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">← 返回主頁</a>
+
+<input id="numbers" placeholder="例如: 8,3,1,6,2">
+<br><br>
+
+<button onclick="startSort()">開始排序</button>
+
+<div id="container"></div>
+
+<script>
+
+let arr=[];
+
+function drawArray(){
+
+    let container=document.getElementById("container");
+    container.innerHTML="";
+
+    for(let i=0;i<arr.length;i++){
+
+        let bar=document.createElement("div");
+        bar.className="bar";
+        bar.style.height=arr[i]*20+"px";
+        bar.innerText=arr[i];
+
+        container.appendChild(bar);
+    }
+}
+
+function sleep(ms){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function merge(left, right){
+
+    let result=[];
+
+    while(left.length > 0 && right.length > 0){
+
+        if(left[0] <= right[0]){
+
+            result.push(left.shift());
+
+        }else{
+
+            result.push(right.shift());
+
+        }
+
+        drawArray();
+        await sleep(300);
+    }
+
+    return result.concat(left).concat(right);
+}
+
+async function mergeSort(arr){
+
+    if(arr.length <= 1){
+
+        return arr;
+    }
+
+    let mid=Math.floor(arr.length / 2);
+    let left=arr.slice(0, mid);
+    let right=arr.slice(mid);
+
+    left=await mergeSort(left);
+    right=await mergeSort(right);
+
+    return await merge(left, right);
+}
+
+async function startSort(){
+
+    let input=document.getElementById("numbers").value;
+
+    arr=input.split(",").map(Number);
+
+    drawArray();
+
+    arr=await mergeSort(arr);
+
+    drawArray();
+}
+
+</script>
+
+</body>
+</html>
